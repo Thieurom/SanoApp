@@ -10,6 +10,8 @@
 		D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB6021252778005F5CD6 /* AppDelegate.swift */; };
 		D8D6DB682125277A005F5CD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB672125277A005F5CD6 /* Assets.xcassets */; };
 		D8D6DB6B2125277A005F5CD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */; };
+		D8D6DB8221252BAB005F5CD6 /* GamePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB8121252BAB005F5CD6 /* GamePiece.swift */; };
+		D8D6DB8421252F16005F5CD6 /* GamePieceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB8321252F16005F5CD6 /* GamePieceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,8 @@
 		D8D6DB6C2125277A005F5CD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D6DB712125277A005F5CD6 /* ThreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D6DB772125277A005F5CD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D6DB8121252BAB005F5CD6 /* GamePiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePiece.swift; sourceTree = "<group>"; };
+		D8D6DB8321252F16005F5CD6 /* GamePieceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				D8D6DB6021252778005F5CD6 /* AppDelegate.swift */,
+				D8D6DB8121252BAB005F5CD6 /* GamePiece.swift */,
 				D8D6DB672125277A005F5CD6 /* Assets.xcassets */,
 				D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */,
 				D8D6DB6C2125277A005F5CD6 /* Info.plist */,
@@ -83,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				D8D6DB772125277A005F5CD6 /* Info.plist */,
+				D8D6DB8321252F16005F5CD6 /* GamePieceTests.swift */,
 			);
 			path = ThreeTests;
 			sourceTree = "<group>";
@@ -141,6 +147,7 @@
 					};
 					D8D6DB702125277A005F5CD6 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 						TestTargetID = D8D6DB5C21252778005F5CD6;
 					};
 				};
@@ -204,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D6DB8221252BAB005F5CD6 /* GamePiece.swift in Sources */,
 				D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D6DB8421252F16005F5CD6 /* GamePieceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +401,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ThreeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -401,6 +411,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.doanthieu.ThreeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Three.app/Three";
@@ -412,6 +423,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ThreeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
