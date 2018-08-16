@@ -8,11 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB6021252778005F5CD6 /* AppDelegate.swift */; };
-		D8D6DB6321252778005F5CD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB6221252778005F5CD6 /* ViewController.swift */; };
-		D8D6DB6621252778005F5CD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB6421252778005F5CD6 /* Main.storyboard */; };
 		D8D6DB682125277A005F5CD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB672125277A005F5CD6 /* Assets.xcassets */; };
 		D8D6DB6B2125277A005F5CD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */; };
-		D8D6DB762125277A005F5CD6 /* ThreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB752125277A005F5CD6 /* ThreeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,13 +25,10 @@
 /* Begin PBXFileReference section */
 		D8D6DB5D21252778005F5CD6 /* Three.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Three.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D6DB6021252778005F5CD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D8D6DB6221252778005F5CD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D8D6DB6521252778005F5CD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8D6DB672125277A005F5CD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8D6DB6A2125277A005F5CD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8D6DB6C2125277A005F5CD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D6DB712125277A005F5CD6 /* ThreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8D6DB752125277A005F5CD6 /* ThreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeTests.swift; sourceTree = "<group>"; };
 		D8D6DB772125277A005F5CD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,8 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				D8D6DB6021252778005F5CD6 /* AppDelegate.swift */,
-				D8D6DB6221252778005F5CD6 /* ViewController.swift */,
-				D8D6DB6421252778005F5CD6 /* Main.storyboard */,
 				D8D6DB672125277A005F5CD6 /* Assets.xcassets */,
 				D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */,
 				D8D6DB6C2125277A005F5CD6 /* Info.plist */,
@@ -90,7 +82,6 @@
 		D8D6DB742125277A005F5CD6 /* ThreeTests */ = {
 			isa = PBXGroup;
 			children = (
-				D8D6DB752125277A005F5CD6 /* ThreeTests.swift */,
 				D8D6DB772125277A005F5CD6 /* Info.plist */,
 			);
 			path = ThreeTests;
@@ -106,6 +97,7 @@
 				D8D6DB5921252778005F5CD6 /* Sources */,
 				D8D6DB5A21252778005F5CD6 /* Frameworks */,
 				D8D6DB5B21252778005F5CD6 /* Resources */,
+				D8D6DB8021252A7C005F5CD6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -179,7 +171,6 @@
 			files = (
 				D8D6DB6B2125277A005F5CD6 /* LaunchScreen.storyboard in Resources */,
 				D8D6DB682125277A005F5CD6 /* Assets.xcassets in Resources */,
-				D8D6DB6621252778005F5CD6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,12 +183,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D8D6DB8021252A7C005F5CD6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D8D6DB5921252778005F5CD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8D6DB6321252778005F5CD6 /* ViewController.swift in Sources */,
 				D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +212,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8D6DB762125277A005F5CD6 /* ThreeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,14 +226,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D8D6DB6421252778005F5CD6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8D6DB6521252778005F5CD6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
