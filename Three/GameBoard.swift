@@ -86,6 +86,46 @@ extension GameBoard {
 
 extension GameBoard {
     
+    /// Check whether the board has a dertemined winning piece on the board
+    /// - Returns: `true` if the board has a winning piece, `false` otherwise
+    func hasWinningPiece() -> Bool {
+        guard let candidate = lastPlacedPiece,
+            numberOfPlacedPiece >= 5 else {
+                // fix the hard-coded value of 5 later
+                return false
+        }
+        
+        let index = board.flatMap { $0 }
+            .index(of: candidate)!
+        
+        // check winning condition on row
+        let row = index / size
+        if piecesAtRow(row).allEqualTo(candidate) {
+            return true
+        }
+        
+        // check winning condition on column
+        let column = index % size
+        if piecesAtColumn(column).allEqualTo(candidate) {
+            return true
+        }
+        
+        // check winning condition on left-to-right diagonal
+        if row == column && piecesAtLeftToRightDiagonal().allEqualTo(candidate) {
+            return true
+        }
+        
+        // check winning condition on right-to-left diagonal
+        if row == (size - 1 - column) && piecesAtRightToLeftDiagonal().allEqualTo(candidate) {
+            return true
+        }
+        
+        return false
+    }
+}
+
+extension GameBoard {
+    
     // Check whether a given number is invalid row
     // This check together with isColumnInBound(:) to make sure a location
     // specified with a row and column is inside the board
@@ -98,5 +138,29 @@ extension GameBoard {
     // specified with a row and column is inside the board
     private func isColumnInBound(_ column: Int) -> Bool {
         return column >= 0 && column < size
+    }
+    
+    // Return the collection of game pieces on given row
+    private func piecesAtRow(_ row: Int) -> [GamePiece?] {
+        precondition(isRowInBound(row), "The row is out of bound!")
+        
+        return board[row]
+    }
+    
+    // Return the collection of game pieces on given column
+    private func piecesAtColumn(_ column: Int) -> [GamePiece?] {
+        precondition(isColumnInBound(column), "The column is out of bound!")
+        
+        return board.map { $0[column] }
+    }
+    
+    // Return the collection of game pieces on the left-to-right diagonal
+    private func piecesAtLeftToRightDiagonal() -> [GamePiece?] {
+        return board.enumerated().map { $1[$0] }
+    }
+    
+    // Return the collection of game pieces on the right-to-left diagonal
+    private func piecesAtRightToLeftDiagonal() -> [GamePiece?] {
+        return board.enumerated().map { $1[size - 1 - $0] }
     }
 }
