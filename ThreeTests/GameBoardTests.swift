@@ -97,7 +97,7 @@ class GameBoardTests: XCTestCase {
                  '---'---'---'
             */
             
-            try board = makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (1, 0), (0, 1), (1, 1), (0, 2))
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (1, 0), (0, 1), (1, 1), (0, 2))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -120,7 +120,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            try board = makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (1, 1), (2, 0))
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (1, 1), (2, 0))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -143,7 +143,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            try board = makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 1), (1, 2), (2, 2))
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 1), (1, 2), (2, 2))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -166,11 +166,92 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            try board = makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
             fatalError()
+        }
+    }
+    
+    func testPlacePieceOnTheBoardHasWinningPiece() {
+        do {
+            /*
+                  0   1   2
+                .___.___.___.
+             0  | ○ | ○ | ● |
+                |---|---|---|
+             1  |   | ● |   |
+                |---|---|---|
+             2  | ● |   |   |
+                '---'---'---'
+             */
+            
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
+            
+            XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
+        } catch {
+            fatalError()
+        }
+        
+        XCTAssertEqual(board.lastPlacedPiece, .solid)
+        
+        do {
+            try board.placeNextPiece(toRow: 2, column: 2)
+            XCTFail("The game board should not be mutated succefully when placing piece on the board has winning piece!")
+        } catch GameBoardError.completed {
+            XCTAssertEqual(board.lastPlacedPiece, .solid)
+        } catch {
+            XCTFail("Incorrect thrown error when mutating the board!")
+        }
+    }
+    
+    func testCheckDrawBoard() {
+        do {
+            /*
+                  0   1   2
+                .___.___.___.
+             0  | ● | ○ | ● |
+                |---|---|---|
+             1  | ● | ○ | ○ |
+                |---|---|---|
+             2  | ○ | ● | ● |
+                '---'---'---'
+             */
+            
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (2, 0), (0, 2), (1, 1), (2, 1), (1, 2), (2, 2))
+            
+            XCTAssertTrue(board.isDrawEnding(), "The board should be in a draw ending!")
+        } catch {
+            fatalError()
+        }
+    }
+    
+    func testPlacePieceOnDrawBoard() {
+        do {
+            /*
+                  0   1   2
+                .___.___.___.
+             0  | ● | ○ | ● |
+                |---|---|---|
+             1  | ● | ○ | ○ |
+                |---|---|---|
+             2  | ○ | ● | ● |
+                '---'---'---'
+             */
+            
+            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (2, 0), (0, 2), (1, 1), (2, 1), (1, 2), (2, 2))
+        } catch {
+            fatalError()
+        }
+        
+        do {
+            try board.placeNextPiece(toRow: 0, column: 0)
+            XCTFail("The game board should not be mutated succefully when placing piece on the draw ending board!")
+        } catch GameBoardError.completed {
+            XCTAssertEqual(board.lastPlacedPiece, .solid)
+        } catch {
+            XCTFail("Incorrect thrown error when mutating the board!")
         }
     }
 }

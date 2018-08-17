@@ -11,7 +11,6 @@ import Foundation
 /// Represent a square board
 /// A board has a fixed, same number of rows and columns
 /// A board also has the first piece, which is allowed to place on the empty board
-/// When one wants to place a piece on the board
 struct GameBoard {
     
     /// The size of the board
@@ -60,6 +59,36 @@ extension GameBoard {
     }
 }
 
+extension GameBoard: CustomStringConvertible {
+    
+    var description: String {
+        var output = ""
+        
+        for row in 0..<size {
+            if row == 0 {
+                output += String(repeating: ".___", count: size)
+            } else {
+                output += String(repeating: "|---", count: size)
+            }
+            
+            output += "|\n"
+            
+            for column in 0..<size {
+                let piece = board[row][column]
+                let pieceText = piece?.description ?? " "
+                output += "| \(pieceText) "
+            }
+            
+            output += "|\n"
+        }
+        
+        output += String(repeating: "'---", count: size)
+        output += "'"
+        
+        return output
+    }
+}
+
 extension GameBoard {
     
     /// Place the next playing piece on the board to given row and column
@@ -73,6 +102,10 @@ extension GameBoard {
     mutating func placeNextPiece(toRow row: Int, column: Int) throws {
         guard isRowInBound(row) && isColumnInBound(column) else {
             throw GameBoardError.outOfBoard
+        }
+        
+        guard !hasWinningPiece() && !isDrawEnding() else {
+            throw GameBoardError.completed
         }
         
         guard board[row][column] == nil else {
@@ -121,6 +154,14 @@ extension GameBoard {
         }
         
         return false
+    }
+    
+    /// Check whether the board has ended with a draw.
+    /// In other words the board has no empty, placeable locations but neither
+    /// two pieces are winner
+    /// - Returns: `true` if the board has ended with a draw, `false` otherwise
+    func isDrawEnding() -> Bool {
+        return numberOfPlacedPiece == size * size && !hasWinningPiece()
     }
 }
 

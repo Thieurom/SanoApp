@@ -12,4 +12,5 @@ import Foundation
 enum GameBoardError: Error {
     case outOfBoard
     case notEmptyLocation
+    case completed
 }
