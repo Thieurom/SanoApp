@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configView()
         setUpSubviews()
     }
 
@@ -36,6 +37,20 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     
+    @objc private func playWithFriendPressed(_ sender: UIButton) {
+        let settingViewController = SettingViewController()
+        
+        navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    // Further config the root view since it will be created programmatically
+    private func configView() {
+        view.backgroundColor = .white
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    // Setup subviews
     private func setUpSubviews() {
         // customize subviews
         playWithFriendButton.backgroundColor = .black
@@ -54,5 +69,8 @@ extension HomeViewController {
             playWithFriendButton.widthAnchor.constraint(equalToConstant: 280),
             playWithFriendButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             playWithFriendButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)])
+        
+        // config action-target for button
+        playWithFriendButton.addTarget(self, action: #selector(playWithFriendPressed(_:)), for: .touchUpInside)
     }
 }

@@ -16,16 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = window ?? UIWindow()
-        window!.backgroundColor = .white
         
         let homeViewController = HomeViewController()
         let navigationController = UINavigationController(rootViewController: homeViewController)
         
         // customize navigation controller's bar
         UINavigationBar.appearance().backgroundColor = .white
+        UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
+        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont.systemFont(ofSize: 16, weight: .bold)]
+        
+        let backImage = UIImage(named: "back_bar_button")
+        UINavigationBar.appearance().backIndicatorImage = backImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backImage
         
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
