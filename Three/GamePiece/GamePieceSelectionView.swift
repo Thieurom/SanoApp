@@ -36,6 +36,13 @@ class GamePieceSelectionView: UIView {
         }
     }
     
+    /// Set the order of the pieces
+    /// - Parameter rightOrder: `true` if the order should be turned to the right order,
+    /// `false` if the order should be turned to the reversed order.
+    func setRightOrder(_ rightOrder: Bool) {
+        isOnRightOrder = rightOrder
+    }
+    
     // MARK: - Initialization
     
     override init(frame: CGRect) {

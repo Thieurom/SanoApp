@@ -37,4 +37,45 @@ class SettingViewControllerTests: XCTestCase {
         
         XCTAssertTrue(button.isDescendant(of: sut.view), "The startButton is not in the view hierarchy!")
     }
+    
+    func testStartButtonActionWhenPieceSelectionIsRightOrder() {
+        UIApplication.shared.keyWindow?.rootViewController = sut
+        
+        let button = sut.startButton
+        button.sendActions(for: .touchUpInside)
+        
+        guard let nextViewController = sut.presentedViewController as? UINavigationController else {
+            XCTFail("The modally-presented view controller should be an instance of UINavigationController!")
+            return
+        }
+        
+        guard let gameViewController = nextViewController.viewControllers.first as? GameViewController else {
+            XCTFail("Root view controller of presented UINavigationController should be an instance of GameViewController!")
+            return
+        }
+        
+        XCTAssertEqual(gameViewController.gameManager.firstPlayingPiece, GamePiece.solid, "The firstPlayingPiece should be GamePiece.solid!")
+    }
+    
+    func testStartButtonActionWhenPieceSelectionIsNotRightOrder() {
+        UIApplication.shared.keyWindow?.rootViewController = sut
+        
+        let selectionView = sut.selectionView
+        selectionView.setRightOrder(false)
+        
+        let button = sut.startButton
+        button.sendActions(for: .touchUpInside)
+        
+        guard let nextViewController = sut.presentedViewController as? UINavigationController else {
+            XCTFail("The modally-presented view controller should be an instance of UINavigationController!")
+            return
+        }
+        
+        guard let gameViewController = nextViewController.viewControllers.first as? GameViewController else {
+            XCTFail("Root view controller of presented UINavigationController should be an instance of GameViewController!")
+            return
+        }
+        
+        XCTAssertEqual(gameViewController.gameManager.firstPlayingPiece, GamePiece.donut, "The firstPlayingPiece should be GamePiece.donut!")
+    }
 }

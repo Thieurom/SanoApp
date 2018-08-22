@@ -76,5 +76,17 @@ extension SettingViewController {
             startButton.widthAnchor.constraint(equalToConstant: 280),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)])
+        
+        // add target-action
+        startButton.addTarget(self, action: #selector(startButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func startButtonPressed(_ sender: UIButton) {
+        let firstPlayingPiece: GamePiece = selectionView.isOnRightOrder ? .solid : .donut
+        let gameManager = GameManager(boardSize: 3, firstPlayingPiece: firstPlayingPiece)
+        let gameViewController = GameViewController(gameManager: gameManager)
+        let navigationController = UINavigationController(rootViewController: gameViewController)
+        
+        present(navigationController, animated: true, completion: nil)
     }
 }
