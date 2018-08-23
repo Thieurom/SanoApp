@@ -119,6 +119,19 @@ extension GameBoard {
 
 extension GameBoard {
     
+    /// Query the game piece at given location specified by `row` and `column`
+    ///
+    /// - Returns: `nil` if the `row` and/or `column` is out of bound,
+    /// or the location is valid but is empty,
+    /// otherwise return the game piece
+    func piece(atRow row: Int, column: Int) -> GamePiece? {
+        guard isRowInBound(row) && isColumnInBound(column) else {
+            return nil
+        }
+        
+        return board[row][column]
+    }
+    
     /// Check whether the board has a dertemined winning piece on the board
     /// - Returns: `true` if the board has a winning piece, `false` otherwise
     func hasWinningPiece() -> Bool {

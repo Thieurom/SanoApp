@@ -10,7 +10,18 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    // MARK: - Data
+    
     let gameManager: GameManager
+    var currentGameBoard: GameBoard!
+    
+    // MARK: - Views
+    
+    lazy var gameBoardView: GameBoardView = {
+        let view = GameBoardView(size: 3)
+        
+        return view
+    }()
     
     // MARK: Initialization
     
@@ -30,6 +41,9 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         configView()
+        setUpSubviews()
+        
+        currentGameBoard = gameManager.newBoard()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +54,9 @@ class GameViewController: UIViewController {
 // MARK: - Private helpers
 
 extension GameViewController {
+    
+    // Subview configuration
+    // ---------------------
     
     // Further config the root view since it will be created programmatically
     private func configView() {
@@ -60,7 +77,64 @@ extension GameViewController {
         navigationItem.leftBarButtonItem = menuButton
     }
     
+    private func setUpSubviews() {
+        view.addSubview(gameBoardView)
+        
+        gameBoardView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            gameBoardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            gameBoardView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            gameBoardView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            gameBoardView.heightAnchor.constraint(equalTo: gameBoardView.widthAnchor)])
+        
+        gameBoardView.delegate = self
+    }
+    
     @objc private func menuBarButtonPressed(_ sender: UIBarButtonItem) {
         // implement later
+    }
+    
+    // Update subviews to reflect changes of model
+    // -------------------------------------------
+    
+    private func updateView() {
+        // update the gameBoard as currentGameBoard has been mutated
+        for row in 0..<currentGameBoard.size {
+            for column in 0..<currentGameBoard.size {
+                if let gamePieceView = gameBoardView.gamePieceView(atRow: row, column: column) {
+                    let gamePiece = currentGameBoard.piece(atRow: row, column: column)
+                    
+                    switch gamePiece {
+                    case .some(.solid):
+                        gamePieceView.style = .solidBlack
+                    case .some(.donut):
+                        gamePieceView.style = .donutBlack
+                    default:
+                        gamePieceView.style = .solidGray
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - GameBoardView Delegte
+
+extension GameViewController: GameBoardViewDelegate {
+    
+    func gameBoardView(_ gameBoardView: GameBoardView, didTap gamePieceView: GamePieceView, atRow row: Int, column: Int) {
+        guard !currentGameBoard.hasWinningPiece() && !currentGameBoard.isDrawEnding() else {
+            return
+        }
+        
+        do {
+            try currentGameBoard.placeNextPiece(toRow: row, column: column)
+            updateView()
+        } catch {
+            // since we've checked currentGameBoard is ended (win or draw) above,
+            // this only catches when user try to tap the already-tapped game piece view
+            return
+        }
     }
 }

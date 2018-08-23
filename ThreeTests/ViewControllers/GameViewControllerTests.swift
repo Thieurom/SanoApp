@@ -31,4 +31,20 @@ class GameViewControllerTests: XCTestCase {
     func testHasGameManager() {
         XCTAssertNotNil(sut.gameManager, "The gameViewController should have property gameManager set after being initialized!")
     }
+    
+    func testHasGameBoard() {
+        let gameBoard = sut.currentGameBoard
+        
+        XCTAssertNotNil(gameBoard, "The gameViewController should have property currentGameBoard set after its view being loaded")
+        
+        XCTAssertEqual(gameBoard?.firstPiece, .solid, "The first piece of the first game board should be solid by default!")
+    }
+    
+    func testHasGameBoardView() {
+        XCTAssertTrue(sut.gameBoardView.isDescendant(of: sut.view), "The gameBoardView should be in view hierarchy!")
+    }
+    
+    func testGameBoardViewSetDelegate() {
+        XCTAssertTrue(sut.gameBoardView.delegate is GameViewController, "The gameBoardView's delegte should be set to an intance of GameViewController!")
+    }
 }

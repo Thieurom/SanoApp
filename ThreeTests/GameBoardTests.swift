@@ -254,6 +254,24 @@ class GameBoardTests: XCTestCase {
             XCTFail("Incorrect thrown error when mutating the board!")
         }
     }
+    
+    func testPieceAtLocation() {
+        XCTAssertNil(board.piece(atRow: 0, column: 0), "The piece at (0, 0) should be nil because of empty board!")
+        XCTAssertNil(board.piece(atRow: 1, column: 2), "The piece at (1, 2) should be nil because of empty board!")
+        XCTAssertNil(board.piece(atRow: -1, column: -1), "The piece at (-1, -1) should be nil because the location is out of bound!")
+        XCTAssertNil(board.piece(atRow: 3, column: 3), "The piece at (3, 3) should be nil because the location is out of bound!")
+        
+        do {
+            try board.placeNextPiece(toRow: 0, column: 0)
+            try board.placeNextPiece(toRow: 1, column: 2)
+        } catch {
+            XCTFail("The game board should be mutated without error!")
+            return
+        }
+        
+        XCTAssertEqual(board.piece(atRow: 0, column: 0), .solid, "The piece at (0, 0) should be solid after placing piece!")
+        XCTAssertEqual(board.piece(atRow: 1, column: 2), .donut, "The piece at (1, 2) should be donut after placing piece!")
+    }
 }
 
 extension GameBoardTests {
