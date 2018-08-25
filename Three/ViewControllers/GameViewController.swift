@@ -17,10 +17,30 @@ class GameViewController: UIViewController {
     
     // MARK: - Views
     
+    lazy var gameScoringView: ScoringView = {
+        let view = ScoringView(playerOneName: "SOLID", playerTwoName: "DONUT")
+        view.backgroundColor = .black
+        view.textColor = .white
+        
+        return view
+    }()
+    
     lazy var gameBoardView: GameBoardView = {
         let view = GameBoardView(size: 3)
         
         return view
+    }()
+    
+    lazy var gameCommentaryView: CommentaryView = {
+        let view = CommentaryView()
+        return view
+    }()
+    
+    lazy var playNewGameBoardButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "play_new_button"), for: .normal)
+        
+        return button
     }()
     
     // MARK: Initialization
@@ -78,15 +98,37 @@ extension GameViewController {
     }
     
     private func setUpSubviews() {
+        view.addSubview(gameScoringView)
         view.addSubview(gameBoardView)
+        view.addSubview(gameCommentaryView)
+        view.addSubview(playNewGameBoardButton)
         
+        gameScoringView.translatesAutoresizingMaskIntoConstraints = false
         gameBoardView.translatesAutoresizingMaskIntoConstraints = false
+        gameCommentaryView.translatesAutoresizingMaskIntoConstraints = false
+        playNewGameBoardButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            gameScoringView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            gameScoringView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gameScoringView.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
         
         NSLayoutConstraint.activate([
             gameBoardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             gameBoardView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             gameBoardView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             gameBoardView.heightAnchor.constraint(equalTo: gameBoardView.widthAnchor)])
+        
+        NSLayoutConstraint.activate([
+            gameCommentaryView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            gameCommentaryView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            gameCommentaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
+        
+        NSLayoutConstraint.activate([
+            playNewGameBoardButton.widthAnchor.constraint(equalToConstant: 40),
+            playNewGameBoardButton.heightAnchor.constraint(equalToConstant: 40),
+            playNewGameBoardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playNewGameBoardButton.topAnchor.constraint(equalTo: gameBoardView.bottomAnchor, constant: 20)])
         
         gameBoardView.delegate = self
     }
