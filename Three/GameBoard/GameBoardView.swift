@@ -25,7 +25,9 @@ class GameBoardView: UIView {
 
     init(size: Int) {
         self.size = size
-        super.init(frame: CGRect.zero)
+        
+        // fix hard-coded number of 40
+        super.init(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         
         initSubviews()
         addSubviews()

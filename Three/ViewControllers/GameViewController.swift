@@ -25,22 +25,9 @@ class GameViewController: UIViewController {
         return view
     }()
     
-    lazy var gameBoardView: GameBoardView = {
-        let view = GameBoardView(size: 3)
-        
+    lazy var gameView: GameView = {
+        let view = GameView()
         return view
-    }()
-    
-    lazy var gameCommentaryView: CommentaryView = {
-        let view = CommentaryView()
-        return view
-    }()
-    
-    lazy var playNewGameBoardButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "play_new_button"), for: .normal)
-        
-        return button
     }()
     
     // MARK: Initialization
@@ -99,14 +86,10 @@ extension GameViewController {
     
     private func setUpSubviews() {
         view.addSubview(gameScoringView)
-        view.addSubview(gameBoardView)
-        view.addSubview(gameCommentaryView)
-        view.addSubview(playNewGameBoardButton)
+        view.addSubview(gameView)
         
         gameScoringView.translatesAutoresizingMaskIntoConstraints = false
-        gameBoardView.translatesAutoresizingMaskIntoConstraints = false
-        gameCommentaryView.translatesAutoresizingMaskIntoConstraints = false
-        playNewGameBoardButton.translatesAutoresizingMaskIntoConstraints = false
+        gameView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             gameScoringView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -114,23 +97,12 @@ extension GameViewController {
             gameScoringView.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
         
         NSLayoutConstraint.activate([
-            gameBoardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            gameBoardView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            gameBoardView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            gameBoardView.heightAnchor.constraint(equalTo: gameBoardView.widthAnchor)])
+            gameView.topAnchor.constraint(equalTo: gameScoringView.bottomAnchor, constant: 20),
+            gameView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            gameView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            gameView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
         
-        NSLayoutConstraint.activate([
-            gameCommentaryView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            gameCommentaryView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            gameCommentaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
-        
-        NSLayoutConstraint.activate([
-            playNewGameBoardButton.widthAnchor.constraint(equalToConstant: 40),
-            playNewGameBoardButton.heightAnchor.constraint(equalToConstant: 40),
-            playNewGameBoardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playNewGameBoardButton.topAnchor.constraint(equalTo: gameBoardView.bottomAnchor, constant: 20)])
-        
-        gameBoardView.delegate = self
+        gameView.gameBoardView.delegate = self
     }
     
     @objc private func menuBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -144,7 +116,7 @@ extension GameViewController {
         // update the gameBoard as currentGameBoard has been mutated
         for row in 0..<currentGameBoard.size {
             for column in 0..<currentGameBoard.size {
-                if let gamePieceView = gameBoardView.gamePieceView(atRow: row, column: column) {
+                if let gamePieceView = gameView.gameBoardView.gamePieceView(atRow: row, column: column) {
                     let gamePiece = currentGameBoard.piece(atRow: row, column: column)
                     
                     switch gamePiece {

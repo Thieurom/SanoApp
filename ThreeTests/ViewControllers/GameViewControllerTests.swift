@@ -39,24 +39,12 @@ class GameViewControllerTests: XCTestCase {
         
         XCTAssertEqual(gameBoard?.firstPiece, .solid, "The first piece of the first game board should be solid by default!")
     }
-    
-    func testHasGameBoardView() {
-        XCTAssertTrue(sut.gameBoardView.isDescendant(of: sut.view), "The gameBoardView should be in view hierarchy!")
-    }
-    
+      
     func testGameBoardViewSetDelegate() {
-        XCTAssertTrue(sut.gameBoardView.delegate is GameViewController, "The gameBoardView's delegte should be set to an intance of GameViewController!")
+        XCTAssertTrue(sut.gameView.gameBoardView.delegate is GameViewController, "The gameBoardView's delegte should be set to an intance of GameViewController!")
     }
     
     func testHasGameScoringView() {
         XCTAssertTrue(sut.gameScoringView.isDescendant(of: sut.view), "The gameScoringView should be in view hierarchy!")
-    }
-    
-    func testHasGameCommentaryView() {
-        XCTAssertTrue(sut.gameCommentaryView.isDescendant(of: sut.view), "The gameCommentaryView should be in view hierarchy!")
-    }
-    
-    func testHasPlayNewGameBoardButton() {
-        XCTAssertTrue(sut.gameScoringView.isDescendant(of: sut.view), "The playNewGameBoardButton should be in view hierarchy!")
     }
 }

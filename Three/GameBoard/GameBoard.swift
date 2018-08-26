@@ -27,6 +27,7 @@ struct GameBoard {
     private var board: [[GamePiece?]]
     
     private var numberOfPlacedPiece = 0
+    private var lastPlacedLocation: (Int, Int)?
     
     /// Create new game board
     ///
@@ -114,6 +115,7 @@ extension GameBoard {
         
         board[row][column] = nextPlacingPiece
         numberOfPlacedPiece += 1
+        lastPlacedLocation = (row, column)
     }
 }
 
@@ -141,17 +143,14 @@ extension GameBoard {
                 return false
         }
         
-        let index = board.flatMap { $0 }
-            .index(of: candidate)!
+        let (row, column) = lastPlacedLocation!
         
         // check winning condition on row
-        let row = index / size
         if piecesAtRow(row).allEqualTo(candidate) {
             return true
         }
         
         // check winning condition on column
-        let column = index % size
         if piecesAtColumn(column).allEqualTo(candidate) {
             return true
         }

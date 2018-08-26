@@ -13,6 +13,7 @@
 		D819261E212A6E95003BA3EF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819261D212A6E95003BA3EF /* SettingViewController.swift */; };
 		D8192620212A6EAB003BA3EF /* SettingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819261F212A6EAB003BA3EF /* SettingViewControllerTests.swift */; };
 		D8192623212ABBD3003BA3EF /* GamePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8192622212ABBD3003BA3EF /* GamePieceView.swift */; };
+		D8425A4F2131B19500D538A7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8425A4E2131B19500D538A7 /* GameView.swift */; };
 		D857C7FF212CF32D00B3AF08 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C7FE212CF32D00B3AF08 /* GameViewController.swift */; };
 		D857C801212CF34600B3AF08 /* GameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */; };
 		D857C803212D123B00B3AF08 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C802212D123B00B3AF08 /* GameBoardView.swift */; };
@@ -50,6 +51,7 @@
 		D819261D212A6E95003BA3EF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D819261F212A6EAB003BA3EF /* SettingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewControllerTests.swift; sourceTree = "<group>"; };
 		D8192622212ABBD3003BA3EF /* GamePieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceView.swift; sourceTree = "<group>"; };
+		D8425A4E2131B19500D538A7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D857C7FE212CF32D00B3AF08 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerTests.swift; sourceTree = "<group>"; };
 		D857C802212D123B00B3AF08 /* GameBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				D8FE1B3221300BF60045EB2F /* ScoringView.swift */,
+				D8425A4E2131B19500D538A7 /* GameView.swift */,
 				D8FE1B392130EFAA0045EB2F /* CommentaryView.swift */,
 			);
 			path = AuxiliaryViews;
@@ -346,6 +349,7 @@
 				D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */,
 				D8D6DB8A2126607D005F5CD6 /* GameBoardError.swift in Sources */,
 				D8FE1B3321300BF60045EB2F /* ScoringView.swift in Sources */,
+				D8425A4F2131B19500D538A7 /* GameView.swift in Sources */,
 				D8D6DB922127CC93005F5CD6 /* GameManagerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
