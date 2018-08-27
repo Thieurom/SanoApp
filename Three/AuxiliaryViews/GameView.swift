@@ -38,7 +38,38 @@ class GameView: UIView {
         addSubviews()
         constraintSubviews()
     }
+}
+
+// MARK: - Public interface
+
+extension GameView {
     
+    func showPlayNewGameBoardButton() {
+        buttonBottomConstraint.constant = -Dimension.spacing
+        playNewGameBoardButton.isEnabled = true
+        
+        UIView.animate(withDuration: 0.25) {
+            self.playNewGameBoardButton.alpha = 1
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func hidePlayNewGameBoardButton(completion: @escaping () -> Void) {
+        buttonBottomConstraint.constant = -2 * Dimension.spacing
+        playNewGameBoardButton.isEnabled = false
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.gameBoardView.alpha = 0
+            self.playNewGameBoardButton.alpha = 0
+            self.layoutIfNeeded()
+        }, completion: { (_) in
+            completion()
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.gameBoardView.alpha = 1
+            })
+        })
+    }
 }
 
 // MARK: - Private helpers

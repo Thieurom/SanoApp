@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represent the piece which is played in a game
-enum GamePiece {
+enum GamePiece: String {
     
     // There are only two types of pieces: solid and donut,
     // (equivalent to cross and nought in classical tic-tac-toe)

@@ -85,7 +85,7 @@ extension GameManager {
     ///     - `GameManagerError.incompletedBoard` if the board still be able to
     /// play
     func addCompletedBoard(_ board: GameBoard) throws {
-        guard board.firstPiece == firstPlayingPiece else {
+        guard board.firstPiece == firstPieceOfNewGameBoard else {
             throw GameManagerError.invalidFirsPlayingPiece
         }
         

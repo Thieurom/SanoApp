@@ -51,6 +51,9 @@ class GameViewController: UIViewController {
         setUpSubviews()
         
         currentGameBoard = gameManager.newBoard()
+        
+        updateGameScoringView()
+        updateGameView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,6 +106,14 @@ extension GameViewController {
             gameView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
         
         gameView.gameBoardView.delegate = self
+        gameView.playNewGameBoardButton.addTarget(self, action: #selector(playNewGameBoardButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc func playNewGameBoardButtonPressed(_ sender: UIButton) {
+        gameView.hidePlayNewGameBoardButton { [unowned self] () in
+            self.currentGameBoard = self.gameManager.newBoard()
+            self.updateGameView()
+        }
     }
     
     @objc private func menuBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -112,7 +123,16 @@ extension GameViewController {
     // Update subviews to reflect changes of model
     // -------------------------------------------
     
-    private func updateView() {
+    private func updateGameView() {
+        updateGameBoardView()
+        updateCommentaryView()
+        
+        if currentGameBoard.hasWinningPiece() || currentGameBoard.isDrawEnding() {
+            gameView.showPlayNewGameBoardButton()
+        }
+    }
+    
+    private func updateGameBoardView() {
         // update the gameBoard as currentGameBoard has been mutated
         for row in 0..<currentGameBoard.size {
             for column in 0..<currentGameBoard.size {
@@ -131,6 +151,23 @@ extension GameViewController {
             }
         }
     }
+    
+    private func updateCommentaryView() {
+        if currentGameBoard.hasWinningPiece() {
+            let winner = (currentGameBoard.lastPlacedPiece!).rawValue.uppercased()
+            gameView.gameCommentaryView.setComment("\(winner) WON!")
+        } else if currentGameBoard.isDrawEnding() {
+            gameView.gameCommentaryView.setComment("IT'S A DRAW!")
+        } else {
+            let nextPiece = (currentGameBoard.nextPlacingPiece).rawValue.capitalized
+            gameView.gameCommentaryView.setComment("\(nextPiece) moves!")
+        }
+    }
+    
+    private func updateGameScoringView() {
+        gameScoringView.setPlayerOneScore(gameManager.winningCount(by: .solid))
+        gameScoringView.setPlayerTwoScore(gameManager.winningCount(by: .donut))
+    }
 }
 
 // MARK: - GameBoardView Delegte
@@ -144,7 +181,16 @@ extension GameViewController: GameBoardViewDelegate {
         
         do {
             try currentGameBoard.placeNextPiece(toRow: row, column: column)
-            updateView()
+            updateGameView()
+            
+            if currentGameBoard.hasWinningPiece() || currentGameBoard.isDrawEnding() {
+                do {
+                    try gameManager.addCompletedBoard(currentGameBoard)
+                    updateGameScoringView()
+                } catch {
+                    return
+                }
+            }
         } catch {
             // since we've checked currentGameBoard is ended (win or draw) above,
             // this only catches when user try to tap the already-tapped game piece view
