@@ -13,6 +13,10 @@
 		D819261E212A6E95003BA3EF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819261D212A6E95003BA3EF /* SettingViewController.swift */; };
 		D8192620212A6EAB003BA3EF /* SettingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D819261F212A6EAB003BA3EF /* SettingViewControllerTests.swift */; };
 		D8192623212ABBD3003BA3EF /* GamePieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8192622212ABBD3003BA3EF /* GamePieceView.swift */; };
+		D84019832134E14C0036FFB2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84019822134E14C0036FFB2 /* MenuViewController.swift */; };
+		D84019852134E16B0036FFB2 /* MenuViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84019842134E16B0036FFB2 /* MenuViewControllerTests.swift */; };
+		D84019872134F93D0036FFB2 /* GhostButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84019862134F93D0036FFB2 /* GhostButton.swift */; };
+		D84019892134FF570036FFB2 /* MenuViewControllerTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84019882134FF570036FFB2 /* MenuViewControllerTransitionManager.swift */; };
 		D8425A4F2131B19500D538A7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8425A4E2131B19500D538A7 /* GameView.swift */; };
 		D857C7FF212CF32D00B3AF08 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C7FE212CF32D00B3AF08 /* GameViewController.swift */; };
 		D857C801212CF34600B3AF08 /* GameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */; };
@@ -51,6 +55,10 @@
 		D819261D212A6E95003BA3EF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D819261F212A6EAB003BA3EF /* SettingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewControllerTests.swift; sourceTree = "<group>"; };
 		D8192622212ABBD3003BA3EF /* GamePieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePieceView.swift; sourceTree = "<group>"; };
+		D84019822134E14C0036FFB2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		D84019842134E16B0036FFB2 /* MenuViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewControllerTests.swift; sourceTree = "<group>"; };
+		D84019862134F93D0036FFB2 /* GhostButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostButton.swift; sourceTree = "<group>"; };
+		D84019882134FF570036FFB2 /* MenuViewControllerTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewControllerTransitionManager.swift; sourceTree = "<group>"; };
 		D8425A4E2131B19500D538A7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D857C7FE212CF32D00B3AF08 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerTests.swift; sourceTree = "<group>"; };
@@ -100,6 +108,8 @@
 				D8192615212A5E3C003BA3EF /* HomeViewController.swift */,
 				D819261D212A6E95003BA3EF /* SettingViewController.swift */,
 				D857C7FE212CF32D00B3AF08 /* GameViewController.swift */,
+				D84019822134E14C0036FFB2 /* MenuViewController.swift */,
+				D84019882134FF570036FFB2 /* MenuViewControllerTransitionManager.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -118,6 +128,7 @@
 				D819261B212A63B1003BA3EF /* HomeViewControllerTests.swift */,
 				D819261F212A6EAB003BA3EF /* SettingViewControllerTests.swift */,
 				D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */,
+				D84019842134E16B0036FFB2 /* MenuViewControllerTests.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -213,6 +224,7 @@
 				D8FE1B3221300BF60045EB2F /* ScoringView.swift */,
 				D8425A4E2131B19500D538A7 /* GameView.swift */,
 				D8FE1B392130EFAA0045EB2F /* CommentaryView.swift */,
+				D84019862134F93D0036FFB2 /* GhostButton.swift */,
 			);
 			path = AuxiliaryViews;
 			sourceTree = "<group>";
@@ -335,7 +347,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D84019892134FF570036FFB2 /* MenuViewControllerTransitionManager.swift in Sources */,
 				D8D6DB8221252BAB005F5CD6 /* GamePiece.swift in Sources */,
+				D84019872134F93D0036FFB2 /* GhostButton.swift in Sources */,
 				D857C803212D123B00B3AF08 /* GameBoardView.swift in Sources */,
 				D8D6DB8E2127BBD6005F5CD6 /* GameManager.swift in Sources */,
 				D8D6DB8C21267626005F5CD6 /* Array+Extensions.swift in Sources */,
@@ -346,6 +360,7 @@
 				D8D6DB8621256A56005F5CD6 /* GameBoard.swift in Sources */,
 				D8192623212ABBD3003BA3EF /* GamePieceView.swift in Sources */,
 				D819261E212A6E95003BA3EF /* SettingViewController.swift in Sources */,
+				D84019832134E14C0036FFB2 /* MenuViewController.swift in Sources */,
 				D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */,
 				D8D6DB8A2126607D005F5CD6 /* GameBoardError.swift in Sources */,
 				D8FE1B3321300BF60045EB2F /* ScoringView.swift in Sources */,
@@ -365,6 +380,7 @@
 				D8D6DB8421252F16005F5CD6 /* GamePieceTests.swift in Sources */,
 				D819261A212A5FAA003BA3EF /* AppLaunchingTests.swift in Sources */,
 				D857C801212CF34600B3AF08 /* GameViewControllerTests.swift in Sources */,
+				D84019852134E16B0036FFB2 /* MenuViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

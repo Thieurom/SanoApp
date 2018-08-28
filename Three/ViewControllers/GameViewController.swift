@@ -88,9 +88,11 @@ extension GameViewController {
     }
     
     private func setUpSubviews() {
+        // add subviews to view hierarchy
         view.addSubview(gameScoringView)
         view.addSubview(gameView)
         
+        // constraint subviews
         gameScoringView.translatesAutoresizingMaskIntoConstraints = false
         gameView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -105,6 +107,7 @@ extension GameViewController {
             gameView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             gameView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
         
+        // further config
         gameView.gameBoardView.delegate = self
         gameView.playNewGameBoardButton.addTarget(self, action: #selector(playNewGameBoardButtonPressed(_:)), for: .touchUpInside)
     }
@@ -117,7 +120,10 @@ extension GameViewController {
     }
     
     @objc private func menuBarButtonPressed(_ sender: UIBarButtonItem) {
-        // implement later
+        let menuViewController = MenuViewController(transitioningAnimated: true)
+        menuViewController.modalPresentationStyle = .overFullScreen
+        
+        present(menuViewController, animated: true, completion: nil)
     }
     
     // Update subviews to reflect changes of model

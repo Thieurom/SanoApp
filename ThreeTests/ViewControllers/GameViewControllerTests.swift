@@ -47,4 +47,30 @@ class GameViewControllerTests: XCTestCase {
     func testHasGameScoringView() {
         XCTAssertTrue(sut.gameScoringView.isDescendant(of: sut.view), "The gameScoringView should be in view hierarchy!")
     }
+    
+    func testMenuButton() {
+        let navigationController = UINavigationController(rootViewController: sut)
+        navigationController.loadViewIfNeeded()
+        
+        let button = sut.navigationItem.leftBarButtonItem
+        
+        XCTAssertNotNil(button, "There should be a leftBarButtonItem!")
+    }
+    
+    func testMenuButtonAction() {
+        let navigationController = UINavigationController(rootViewController: sut)
+        navigationController.loadViewIfNeeded()
+        
+        UIApplication.shared.keyWindow?.rootViewController = navigationController
+        
+        guard let button = sut.navigationItem.leftBarButtonItem else {
+            XCTFail("There should be a leftBarButtonItem!")
+            return
+        }
+        
+        sut.perform(button.action, with: nil)
+        let nextViewController = sut.presentedViewController
+        
+        XCTAssertTrue(nextViewController is MenuViewController, "The modally-presented view controller should be an instance of MenuViewController!")
+    }
 }
