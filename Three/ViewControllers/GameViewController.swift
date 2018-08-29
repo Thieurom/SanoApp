@@ -120,8 +120,30 @@ extension GameViewController {
     }
     
     @objc private func menuBarButtonPressed(_ sender: UIBarButtonItem) {
-        let menuViewController = MenuViewController(transitioningAnimated: true)
-        menuViewController.modalPresentationStyle = .overFullScreen
+        let menuViewController = MenuViewController()
+        
+        // let user quits the game, coming back to the home screen
+        let quitAction = MenuAction(title: "Quit game", style: .cancel) {
+            guard let rootViewController = self.view.window?.rootViewController as? UINavigationController else {
+                return
+            }
+            
+            rootViewController.dismiss(animated: true, completion: {
+                rootViewController.popToRootViewController(animated: true)
+            })
+        }
+        
+        menuViewController.addMenuAction(quitAction)
+        
+        // if the current game board hasn't been completed, it is allowed to be restarted
+        if !currentGameBoard.hasWinningPiece() && !currentGameBoard.isDrawEnding() {
+            let restartAction = MenuAction(title: "Restart current board", style: .continnue) { [weak self] () in
+                self?.currentGameBoard = self?.gameManager.newBoard()
+                self?.updateGameView()
+            }
+            
+            menuViewController.addMenuAction(restartAction)
+        }
         
         present(menuViewController, animated: true, completion: nil)
     }

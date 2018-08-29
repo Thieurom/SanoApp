@@ -13,6 +13,13 @@ class MenuViewController: UIViewController {
     // we have to a strong reference to an UIViewControllerTransitioningDelegate object,
     // so later when we assign it to transitioningDelegate, the retain count would inrease.
     private var transitionManager: TransitionManager?
+    
+    private var menuActions = [MenuAction]()
+    private var bottomActionButton: GhostButton?
+    
+    var numberOfMenuActions: Int {
+        return menuActions.count
+    }
 
     // MARK: - Subviews
     
@@ -21,33 +28,13 @@ class MenuViewController: UIViewController {
         return view
     }()
     
-    lazy var quitButton: GhostButton = {
-        let button = GhostButton(title: "Quit game", icon: UIImage(named: "quit_button_icon"))
-        
-        return button
-    }()
-    
-    lazy var restartButton: GhostButton = {
-        let button = GhostButton(title: "Restart current board", icon: UIImage(named: "restart_button_icon"))
-        
-        return button
-    }()
-    
-    lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("CLOSE", for: .normal)
-        
-        return button
-    }()
-    
     // MARK: - Initialization
     
-    init(transitioningAnimated: Bool = false) {
+    init() {
         super.init(nibName: nil, bundle: nil)
         
-        if transitioningAnimated {
-            self.transitionManager = TransitionManager()
-        }
+        self.transitionManager = TransitionManager()
+        self.modalPresentationStyle = .overFullScreen
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,6 +55,15 @@ class MenuViewController: UIViewController {
     }
 }
 
+// MARK: - Public
+
+extension MenuViewController {
+    
+    func addMenuAction(_ menuAction: MenuAction) {
+        menuActions.append(menuAction)
+    }
+}
+
 // MARK: - Private helpers
 
 extension MenuViewController {
@@ -83,63 +79,69 @@ extension MenuViewController {
     }
     
     private func setUpSubviews() {
-        // customize subviews
-        closeButton.backgroundColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
-        closeButton.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0), for: .normal)
-        closeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        closeButton.layer.cornerRadius = 3
-        
         menuView.backgroundColor = .white
         menuView.layer.cornerRadius = 3
         
         // add subviews to view hierarchy
-        menuView.addSubview(quitButton)
-        menuView.addSubview(restartButton)
-        menuView.addSubview(closeButton)
         view.addSubview(menuView)
         
         // constraint subviews
         menuView.translatesAutoresizingMaskIntoConstraints = false
-        quitButton.translatesAutoresizingMaskIntoConstraints = false
-        restartButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             menuView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             menuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             menuView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)])
+        for (index, menuAction) in menuActions.enumerated() {
+            let button = GhostButton(title: menuAction.title, icon: menuAction.style.icon())
+            button.tag = index
+            
+            menuView.addSubview(button)
+            
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                button.heightAnchor.constraint(equalToConstant: 40),
+                button.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 8),
+                button.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -8),
+                button.topAnchor.constraint(equalTo: bottomActionButton?.bottomAnchor ?? menuView.topAnchor, constant: 8)])
+            
+            button.addTarget(self, action: #selector(actionHandling(_:)), for: .touchUpInside)
+            
+            bottomActionButton = button
+        }
         
-        NSLayoutConstraint.activate([
-            quitButton.heightAnchor.constraint(equalToConstant: 40),
-            quitButton.topAnchor.constraint(equalTo: menuView.topAnchor, constant: 8),
-            quitButton.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 8),
-            quitButton.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -8)])
+        // menu will have at least one item, and it allows user just to dismiss the controller
+        // add a close button at the bottom of the menuView
+        let closeButton: UIButton = {
+            let closeButton = UIButton()
+            
+            closeButton.setTitle("CLOSE", for: .normal)
+            closeButton.backgroundColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1.0)
+            closeButton.setTitleColor(UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0), for: .normal)
+            closeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+            closeButton.layer.cornerRadius = 3
+            
+            return closeButton
+        }()
         
-        NSLayoutConstraint.activate([
-            restartButton.heightAnchor.constraint(equalToConstant: 40),
-            restartButton.topAnchor.constraint(equalTo: quitButton.bottomAnchor, constant: 8),
-            restartButton.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 8),
-            restartButton.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -8)])
+        menuView.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             closeButton.heightAnchor.constraint(equalToConstant: 40),
-            closeButton.topAnchor.constraint(equalTo: restartButton.bottomAnchor, constant: 8),
+            closeButton.topAnchor.constraint(equalTo: bottomActionButton?.bottomAnchor ?? menuView.topAnchor, constant: 8),
             closeButton.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 8),
             closeButton.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -8),
             closeButton.bottomAnchor.constraint(equalTo: menuView.bottomAnchor, constant: -8)])
-        
-        // further config
-        quitButton.addTarget(self, action: #selector(dimissToRootViewController), for: .touchUpInside)
+
         closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
     }
     
-    @objc private func dimissToRootViewController() {
-        guard let rootViewController = view.window?.rootViewController as? UINavigationController else {
-            return
-        }
-        
-        rootViewController.dismiss(animated: true) {
-            rootViewController.popToRootViewController(animated: true)
+    @objc private func actionHandling(_ sender: UIButton) {
+        dismiss(animated: true) {
+            let index = sender.tag
+            self.menuActions[index].handler!()
         }
     }
     
@@ -158,5 +160,20 @@ extension MenuViewController: UIGestureRecognizerDelegate {
         }
         
         return true
+    }
+}
+
+// MARK: - Extensions for helper
+
+extension MenuItemStyle {
+
+    // return icon for menu item
+    func icon() -> UIImage? {
+        switch self {
+        case .cancel:
+            return UIImage(named: "quit_button_icon")
+        case .continnue:
+            return UIImage(named: "restart_button_icon")
+        }
     }
 }

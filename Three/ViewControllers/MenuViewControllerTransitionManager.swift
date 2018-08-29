@@ -70,7 +70,9 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
     private func moveOff(menuViewController: MenuViewController) {
         menuViewController.view.alpha = 0
         
-        let menuViewHeight: CGFloat = 152
+        // hack:
+        let numberOfItems = menuViewController.numberOfMenuActions + 1
+        let menuViewHeight: CGFloat = CGFloat(numberOfItems * 40 + (numberOfItems + 1) * 8)
         menuViewController.menuView.transform = CGAffineTransform(translationX: 0, y: menuViewHeight)
     }
 }

@@ -69,8 +69,12 @@ class GameViewControllerTests: XCTestCase {
         }
         
         sut.perform(button.action, with: nil)
-        let nextViewController = sut.presentedViewController
         
-        XCTAssertTrue(nextViewController is MenuViewController, "The modally-presented view controller should be an instance of MenuViewController!")
+        guard let nextViewController = sut.presentedViewController as? MenuViewController else {
+            XCTFail("The modally-presented view controller should be an instance of MenuViewController!")
+            return
+        }
+        
+        XCTAssertEqual(nextViewController.numberOfMenuActions, 2, "The MenuViewController is displayed with 2 action (quit and restart)!")
     }
 }
