@@ -129,7 +129,18 @@ extension MenuViewController {
             closeButton.bottomAnchor.constraint(equalTo: menuView.bottomAnchor, constant: -8)])
         
         // further config
+        quitButton.addTarget(self, action: #selector(dimissToRootViewController), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
+    }
+    
+    @objc private func dimissToRootViewController() {
+        guard let rootViewController = view.window?.rootViewController as? UINavigationController else {
+            return
+        }
+        
+        rootViewController.dismiss(animated: true) {
+            rootViewController.popToRootViewController(animated: true)
+        }
     }
     
     @objc private func dismissSelf() {
@@ -137,7 +148,7 @@ extension MenuViewController {
     }
 }
 
-// MARK: -
+// MARK: - UIGestureRecognizerDelegate
 
 extension MenuViewController: UIGestureRecognizerDelegate {
     
