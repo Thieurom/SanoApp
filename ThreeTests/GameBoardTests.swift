@@ -97,7 +97,7 @@ class GameBoardTests: XCTestCase {
                  '---'---'---'
             */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (1, 0), (0, 1), (1, 1), (0, 2))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (1, 0), (0, 1), (1, 1), (0, 2))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -120,7 +120,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (1, 1), (2, 0))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (1, 1), (2, 0))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -143,7 +143,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 1), (1, 2), (2, 2))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 1), (1, 2), (2, 2))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -166,7 +166,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -187,7 +187,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 2), (0, 0), (1, 1), (0, 1), (2, 0))
             
             XCTAssertTrue(board.hasWinningPiece(), "The board should be in the state that the solid piece is the winner")
         } catch {
@@ -219,7 +219,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (2, 0), (0, 2), (1, 1), (2, 1), (1, 2), (2, 2))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (2, 0), (0, 2), (1, 1), (2, 1), (1, 2), (2, 2))
             
             XCTAssertTrue(board.isDrawEnding(), "The board should be in a draw ending!")
         } catch {
@@ -240,7 +240,7 @@ class GameBoardTests: XCTestCase {
                 '---'---'---'
              */
             
-            board = try makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (2, 0), (0, 2), (1, 1), (2, 1), (1, 2), (2, 2))
+            board = try GameBoardTests.makeGameBoard(firstPiece: .solid, filledWithLocations: (0, 0), (0, 1), (1, 0), (2, 0), (0, 2), (1, 1), (2, 1), (1, 2), (2, 2))
         } catch {
             fatalError()
         }
@@ -276,7 +276,7 @@ class GameBoardTests: XCTestCase {
 
 extension GameBoardTests {
     
-    func makeGameBoard(firstPiece: GamePiece, filledWithLocations locations: (row: Int, column: Int)...) throws -> GameBoard {
+    class func makeGameBoard(firstPiece: GamePiece, filledWithLocations locations: (row: Int, column: Int)...) throws -> GameBoard {
         
         var board = GameBoard(size: 3, firstPiece: firstPiece)
         

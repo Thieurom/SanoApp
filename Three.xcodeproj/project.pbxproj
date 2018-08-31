@@ -22,6 +22,8 @@
 		D857C7FF212CF32D00B3AF08 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C7FE212CF32D00B3AF08 /* GameViewController.swift */; };
 		D857C801212CF34600B3AF08 /* GameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */; };
 		D857C803212D123B00B3AF08 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D857C802212D123B00B3AF08 /* GameBoardView.swift */; };
+		D87D42322138D36C00C07904 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87D42312138D36C00C07904 /* Robot.swift */; };
+		D87D42352138D38600C07904 /* RobotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87D42342138D38600C07904 /* RobotTests.swift */; };
 		D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D6DB6021252778005F5CD6 /* AppDelegate.swift */; };
 		D8D6DB682125277A005F5CD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB672125277A005F5CD6 /* Assets.xcassets */; };
 		D8D6DB6B2125277A005F5CD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */; };
@@ -65,6 +67,8 @@
 		D857C7FE212CF32D00B3AF08 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D857C800212CF34600B3AF08 /* GameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerTests.swift; sourceTree = "<group>"; };
 		D857C802212D123B00B3AF08 /* GameBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
+		D87D42312138D36C00C07904 /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		D87D42342138D38600C07904 /* RobotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotTests.swift; sourceTree = "<group>"; };
 		D8D6DB5D21252778005F5CD6 /* Three.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Three.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D6DB6021252778005F5CD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8D6DB672125277A005F5CD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,6 +140,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		D87D42332138D37200C07904 /* Robot */ = {
+			isa = PBXGroup;
+			children = (
+				D87D42312138D36C00C07904 /* Robot.swift */,
+			);
+			path = Robot;
+			sourceTree = "<group>";
+		};
 		D8D6DB5421252778005F5CD6 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +174,7 @@
 				D8D6DB952127CCB7005F5CD6 /* GameManager */,
 				D8D6DB942127CCB0005F5CD6 /* GamePiece */,
 				D8D6DB932127CCA6005F5CD6 /* GameBoard */,
+				D87D42332138D37200C07904 /* Robot */,
 				D8FE1B3421300C020045EB2F /* AuxiliaryViews */,
 				D8D6DB962127CCBE005F5CD6 /* Extensions */,
 				D8D6DB672125277A005F5CD6 /* Assets.xcassets */,
@@ -178,6 +191,7 @@
 				D8192619212A5FAA003BA3EF /* AppLaunchingTests.swift */,
 				D8D6DB8F2127BBE9005F5CD6 /* GameManagerTests.swift */,
 				D8D6DB8721256A67005F5CD6 /* GameBoardTests.swift */,
+				D87D42342138D38600C07904 /* RobotTests.swift */,
 				D8192621212A6EB0003BA3EF /* ViewControllers */,
 				D8D6DB772125277A005F5CD6 /* Info.plist */,
 			);
@@ -366,6 +380,7 @@
 				D819261E212A6E95003BA3EF /* SettingViewController.swift in Sources */,
 				D84019832134E14C0036FFB2 /* MenuViewController.swift in Sources */,
 				D8D6DB6121252778005F5CD6 /* AppDelegate.swift in Sources */,
+				D87D42322138D36C00C07904 /* Robot.swift in Sources */,
 				D8D6DB8A2126607D005F5CD6 /* GameBoardError.swift in Sources */,
 				D8FE1B3321300BF60045EB2F /* ScoringView.swift in Sources */,
 				D8425A4F2131B19500D538A7 /* GameView.swift in Sources */,
@@ -384,6 +399,7 @@
 				D8D6DB8421252F16005F5CD6 /* GamePieceTests.swift in Sources */,
 				D819261A212A5FAA003BA3EF /* AppLaunchingTests.swift in Sources */,
 				D857C801212CF34600B3AF08 /* GameViewControllerTests.swift in Sources */,
+				D87D42352138D38600C07904 /* RobotTests.swift in Sources */,
 				D84019852134E16B0036FFB2 /* MenuViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
