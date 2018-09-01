@@ -12,9 +12,16 @@ class HomeViewController: UIViewController {
     
     // MARK: - Subviews
     
-    lazy var playWithFriendButton: UIButton = {
-        let button = UIButton()
+    lazy var playWithFriendButton: Button = {
+        let button = Button()
         button.setTitle("Play with Friend", for: .normal)
+        
+        return button
+    }()
+    
+    lazy var fightTheRobotButton: Button = {
+        let button = Button(style: .secondary)
+        button.setTitle("Fight the Robot", for: .normal)
         
         return button
     }()
@@ -37,8 +44,14 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     
-    @objc private func playWithFriendPressed(_ sender: UIButton) {
-        let settingViewController = SettingViewController()
+    @objc private func playWithFriendButtonPressed(_ sender: UIButton) {
+        let settingViewController = SettingViewController(isFightingRobot: false)
+        
+        navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    @objc private func fightTheRobotButtonPressed(_ sender: UIButton) {
+        let settingViewController = SettingViewController(isFightingRobot: true)
         
         navigationController?.pushViewController(settingViewController, animated: true)
     }
@@ -66,25 +79,29 @@ extension HomeViewController {
     
     // Setup subviews
     private func setUpSubviews() {
-        // customize subviews
-        playWithFriendButton.backgroundColor = .black
-        playWithFriendButton.titleLabel?.textColor = .white
-        playWithFriendButton.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
-        playWithFriendButton.layer.cornerRadius = 8.0
-        
         // add subviews to view hierarchy
         view.addSubview(playWithFriendButton)
+        view.addSubview(fightTheRobotButton)
         
         // constraint subviews
         playWithFriendButton.translatesAutoresizingMaskIntoConstraints = false
+        fightTheRobotButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            playWithFriendButton.heightAnchor.constraint(equalToConstant: 50),
-            playWithFriendButton.widthAnchor.constraint(equalToConstant: 280),
-            playWithFriendButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            playWithFriendButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)])
+            playWithFriendButton.heightAnchor.constraint(equalToConstant: 44),
+            playWithFriendButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
+            playWithFriendButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10),
+            playWithFriendButton.bottomAnchor.constraint(equalTo: fightTheRobotButton.topAnchor, constant: -8)])
+        
+        NSLayoutConstraint.activate([
+            fightTheRobotButton.heightAnchor.constraint(equalToConstant: 44),
+            fightTheRobotButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
+            fightTheRobotButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10),
+            fightTheRobotButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -160)])
         
         // config action-target for button
-        playWithFriendButton.addTarget(self, action: #selector(playWithFriendPressed(_:)), for: .touchUpInside)
+        playWithFriendButton.addTarget(self, action: #selector(playWithFriendButtonPressed(_:)), for: .touchUpInside)
+        
+        fightTheRobotButton.addTarget(self, action: #selector(fightTheRobotButtonPressed(_:)), for: .touchUpInside)
     }
 }

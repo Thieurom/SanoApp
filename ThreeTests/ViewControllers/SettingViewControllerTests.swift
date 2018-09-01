@@ -16,7 +16,7 @@ class SettingViewControllerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        sut = SettingViewController()
+        sut = SettingViewController(isFightingRobot: false)
         sut.loadViewIfNeeded()
     }
     

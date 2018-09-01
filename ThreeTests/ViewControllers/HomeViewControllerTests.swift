@@ -31,16 +31,41 @@ class HomeViewControllerTests: XCTestCase {
         XCTAssertTrue(button.isDescendant(of: sut.view), "The playWithFriendButton is not in view hierarchy!")
     }
     
-    func testPlayWithFriendAction() {
+    func testPlayWithFriendButtonAction() {
         let mockNavigationController = MockNavigationController(rootViewController: sut)
         UIApplication.shared.keyWindow?.rootViewController = mockNavigationController
         
         let button = sut.playWithFriendButton
         button.sendActions(for: .touchUpInside)
         
-        let nextViewController = mockNavigationController.lastPushedViewController
+        guard let nextViewController = mockNavigationController.lastPushedViewController as? SettingViewController else {
+            XCTFail("An instance of SettingViewController was not displayed when pressing playWithFriendButton!")
+            
+            return
+        }
         
-        XCTAssertTrue(nextViewController is SettingViewController, "An instance of SettingViewController was not displayed when pressing playWithFriendButton!")
+        XCTAssertFalse(nextViewController.isFightingRobot, "")
+    }
+    
+    func testHasFightTheRobotButton() {
+        let button = sut.fightTheRobotButton
+        XCTAssertTrue(button.isDescendant(of: sut.view), "The fightTheRobotButton is not in view hierarchy!")
+    }
+    
+    func testFightTheRobotButtonAction() {
+        let mockNavigationController = MockNavigationController(rootViewController: sut)
+        UIApplication.shared.keyWindow?.rootViewController = mockNavigationController
+        
+        let button = sut.fightTheRobotButton
+        button.sendActions(for: .touchUpInside)
+        
+        guard let nextViewController = mockNavigationController.lastPushedViewController as? SettingViewController else {
+            XCTFail("An instance of SettingViewController was not displayed when pressing playWithFriendButton!")
+            
+            return
+        }
+        
+        XCTAssertTrue(nextViewController.isFightingRobot, "")
     }
 }
 

@@ -15,10 +15,15 @@ class GameViewController: UIViewController {
     let gameManager: GameManager
     var currentGameBoard: GameBoard!
     
+    private var robot: Robot?
+    
     // MARK: - Views
     
     lazy var gameScoringView: ScoringView = {
-        let view = ScoringView(playerOneName: "SOLID", playerTwoName: "DONUT")
+        let playerOneName = gameManager.firstPlayingPiece.rawValue
+        let playerTwoName = gameManager.firstPlayingPiece.opposite.rawValue
+        
+        let view = ScoringView(playerOneName: playerOneName.uppercased(), playerTwoName: playerTwoName.uppercased())
         view.backgroundColor = .black
         view.textColor = .white
         
@@ -32,8 +37,12 @@ class GameViewController: UIViewController {
     
     // MARK: Initialization
     
-    init(gameManager: GameManager) {
+    init(gameManager: GameManager, isFightingRobot: Bool = false) {
         self.gameManager = gameManager
+        
+        if isFightingRobot {
+            robot = Robot(playingPiece: gameManager.firstPlayingPiece.opposite)
+        }
         
         super.init(nibName: nil, bundle: nil)
     }

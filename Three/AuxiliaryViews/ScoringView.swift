@@ -99,7 +99,7 @@ extension ScoringView {
     
     private func initSubviews() {
         separatorLabel = UILabel()
-        separatorLabel.text = " - "
+        separatorLabel.text = "-"
         separatorLabel.textAlignment = .center
         separatorLabel.textColor = textColor
         separatorLabel.font = UIFont.systemFont(ofSize: Dimension.scoreLabelFontSize, weight: .medium)
