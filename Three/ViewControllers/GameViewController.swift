@@ -13,9 +13,31 @@ class GameViewController: UIViewController {
     // MARK: - Data
     
     let gameManager: GameManager
-    var currentGameBoard: GameBoard!
+    
+    var currentGameBoard: GameBoard! {
+        didSet {
+            if let robot = robot {
+                willRobotPlay = robot.playingPiece == currentGameBoard.nextPlacingPiece
+            }
+        }
+    }
     
     private var robot: Robot?
+    
+    private var willRobotPlay: Bool? {
+        didSet {
+            if willRobotPlay != nil && willRobotPlay == true {
+                // here is robot playing
+                DispatchQueue.global().async {
+                    if let location = self.robot?.play(gameBoard: self.currentGameBoard) {
+                        DispatchQueue.main.async {
+                            self.playCurrentGameBoard(atRow: location.row, column: location.column)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     // MARK: - Views
     
@@ -42,6 +64,7 @@ class GameViewController: UIViewController {
         
         if isFightingRobot {
             robot = Robot(playingPiece: gameManager.firstPlayingPiece.opposite)
+            willRobotPlay = false
         }
         
         super.init(nibName: nil, bundle: nil)
@@ -205,20 +228,17 @@ extension GameViewController {
         gameScoringView.setPlayerOneScore(gameManager.winningCount(by: .solid))
         gameScoringView.setPlayerTwoScore(gameManager.winningCount(by: .donut))
     }
-}
-
-// MARK: - GameBoardView Delegte
-
-extension GameViewController: GameBoardViewDelegate {
     
-    func gameBoardView(_ gameBoardView: GameBoardView, didTap gamePieceView: GamePieceView, atRow row: Int, column: Int) {
+    //
+    private func playCurrentGameBoard(atRow row: Int, column: Int) {
         guard !currentGameBoard.hasWinningPiece() && !currentGameBoard.isDrawEnding() else {
             return
         }
         
         do {
             try currentGameBoard.placeNextPiece(toRow: row, column: column)
-            updateGameView()
+            
+            self.updateGameView()
             
             if currentGameBoard.hasWinningPiece() || currentGameBoard.isDrawEnding() {
                 do {
@@ -228,10 +248,25 @@ extension GameViewController: GameBoardViewDelegate {
                     return
                 }
             }
+            
         } catch {
             // since we've checked currentGameBoard is ended (win or draw) above,
             // this only catches when user try to tap the already-tapped game piece view
             return
         }
+    }
+}
+
+// MARK: - GameBoardView Delegte
+
+extension GameViewController: GameBoardViewDelegate {
+    
+    func gameBoardView(_ gameBoardView: GameBoardView, didTap gamePieceView: GamePieceView, atRow row: Int, column: Int) {
+        if robot != nil && willRobotPlay == true {
+            return
+        }
+        
+        // here is user playing
+        playCurrentGameBoard(atRow: row, column: column)
     }
 }
