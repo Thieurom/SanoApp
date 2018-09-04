@@ -80,24 +80,41 @@ extension HomeViewController {
     // Setup subviews
     private func setUpSubviews() {
         // add subviews to view hierarchy
+        let gameTitleView = GameTitleView()
+        let gameTitleContainerView = UIView()
+        
+        gameTitleContainerView.addSubview(gameTitleView)
+        view.addSubview(gameTitleContainerView)
         view.addSubview(playWithFriendButton)
         view.addSubview(fightTheRobotButton)
         
         // constraint subviews
+        gameTitleContainerView.translatesAutoresizingMaskIntoConstraints = false
+        gameTitleView.translatesAutoresizingMaskIntoConstraints = false
         playWithFriendButton.translatesAutoresizingMaskIntoConstraints = false
         fightTheRobotButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            playWithFriendButton.heightAnchor.constraint(equalToConstant: 44),
-            playWithFriendButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
-            playWithFriendButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10),
-            playWithFriendButton.bottomAnchor.constraint(equalTo: fightTheRobotButton.topAnchor, constant: -8)])
+            gameTitleContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            gameTitleContainerView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            gameTitleContainerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            gameTitleContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)])
         
         NSLayoutConstraint.activate([
+            gameTitleView.centerXAnchor.constraint(equalTo: gameTitleContainerView.centerXAnchor),
+            gameTitleView.bottomAnchor.constraint(equalTo: gameTitleContainerView.bottomAnchor)])
+        
+        NSLayoutConstraint.activate([
+            playWithFriendButton.topAnchor.constraint(equalTo: gameTitleView.bottomAnchor, constant: 100),
+            playWithFriendButton.heightAnchor.constraint(equalToConstant: 44),
+            playWithFriendButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
+            playWithFriendButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)])
+        
+        NSLayoutConstraint.activate([
+            fightTheRobotButton.topAnchor.constraint(equalTo: playWithFriendButton.bottomAnchor, constant: 8),
             fightTheRobotButton.heightAnchor.constraint(equalToConstant: 44),
             fightTheRobotButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
-            fightTheRobotButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10),
-            fightTheRobotButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -160)])
+            fightTheRobotButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)])
         
         // config action-target for button
         playWithFriendButton.addTarget(self, action: #selector(playWithFriendButtonPressed(_:)), for: .touchUpInside)
