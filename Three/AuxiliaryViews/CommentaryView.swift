@@ -50,7 +50,7 @@ class CommentaryView: UIView {
 extension CommentaryView {
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: Dimension.boundsHeight)
+        return CGSize(width: UIView.noIntrinsicMetric, height: Dimension.boundsHeight)
     }
     
     func setComment(_ comment: String) {
