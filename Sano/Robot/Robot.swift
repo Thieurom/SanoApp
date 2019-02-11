@@ -42,7 +42,7 @@ class Robot {
             return location
         }
         
-        return minimax(gameBoard: gameBoard, depth: 0).location
+        return minimax(gameBoard: gameBoard, depth: 0, alpha: Int.min, beta: Int.max).location
     }
 }
 
@@ -53,7 +53,7 @@ extension Robot {
     private typealias Move = (location: Location?, score: Int)
     
     // the main algorithms
-    private func minimax(gameBoard: GameBoard, depth: Int) -> Move {
+    private func minimax(gameBoard: GameBoard, depth: Int, alpha: Int, beta: Int) -> Move {
         // base case
         if isGameBoardCompleted(gameBoard) {
             let score = evaluate(gameBoard: gameBoard, at: depth)
@@ -62,27 +62,46 @@ extension Robot {
         
         // get all possible locations to be played at current depth of the game board
         let locations = emptyLocations(of: gameBoard)
-        
-        // calculate score for each possible locations
-        let scores: [Int] = locations.map { location in
+
+        let isMaximizing = gameBoard.nextPlacingPiece == playingPiece
+        var bestScore = isMaximizing ? Int.min : Int.max
+        var bestLocation: Location?
+        var alpha = alpha
+        var beta = beta
+
+        for location in locations {
             do {
                 // we need to create a copy of current game board before mutating it
                 var board = gameBoard
-                
+
                 try board.placeNextPiece(toRow: location.row, column: location.column)
-                return minimax(gameBoard: board, depth: depth + 1).score
+                let score = minimax(gameBoard: board, depth: depth + 1, alpha: alpha, beta: beta).score
+
+                if isMaximizing {
+                    if score > bestScore {
+                        bestScore = score
+                        bestLocation = location
+                    }
+
+                    alpha = max(bestScore, alpha)
+                } else {
+                    if score < bestScore {
+                        bestScore = score
+                        bestLocation = location
+                    }
+
+                    beta = min(bestScore, beta)
+                }
+
+                if alpha >= beta {
+                    break
+                }
             } catch {
                 fatalError()
             }
         }
-        
-        let minIndex = scores.index(of: scores.min()!)!
-        let maxIndex = scores.index(of: scores.max()!)!
-        
-        // get the best index depending on which piece is going to play
-        let bestIndex = (gameBoard.nextPlacingPiece == playingPiece) ? maxIndex : minIndex
-        
-        return (locations[bestIndex], scores[bestIndex])
+
+        return (bestLocation, bestScore)
     }
     
     // evaluate the game board at given depth by scoring
