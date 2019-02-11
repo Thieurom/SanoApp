@@ -54,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D808E58222116E8100EC1165 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		D808E584221174C400EC1165 /* debug.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.example.xcconfig; sourceTree = "<group>"; };
 		D8192615212A5E3C003BA3EF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D8192619212A5FAA003BA3EF /* AppLaunchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchingTests.swift; sourceTree = "<group>"; };
 		D819261B212A63B1003BA3EF /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
@@ -112,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D808E58322116E8600EC1165 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D808E58222116E8100EC1165 /* debug.xcconfig */,
+				D808E584221174C400EC1165 /* debug.example.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		D8192617212A5E41003BA3EF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +193,7 @@
 				D8FE1B3421300C020045EB2F /* AuxiliaryViews */,
 				D8D6DB962127CCBE005F5CD6 /* Extensions */,
 				D8D6DB672125277A005F5CD6 /* Assets.xcassets */,
+				D808E58322116E8600EC1165 /* Config */,
 				D8D6DB692125277A005F5CD6 /* LaunchScreen.storyboard */,
 				D8D6DB6C2125277A005F5CD6 /* Info.plist */,
 			);
@@ -468,6 +480,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -528,6 +541,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
