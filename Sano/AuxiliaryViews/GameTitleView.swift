@@ -13,7 +13,6 @@ class GameTitleView: UIView {
     // MARK: Subviews
     
     private var gameImageView: UIImageView!
-    private var titleLabel: UILabel!
     private var descriptionLabel: UILabel!
     
     // MARK: Initializations
@@ -48,42 +47,28 @@ class GameTitleView: UIView {
 extension GameTitleView {
     
     private func initSubviews() {
-        gameImageView = UIImageView(image: UIImage(named: "AppIcon"))
-        
-        titleLabel = UILabel()
-        titleLabel.text = "Sano".uppercased()
-        titleLabel.font = UIFont(name: "AvenirNext-Heavy", size: 48)
-        titleLabel.minimumScaleFactor = 0.8
-        titleLabel.textAlignment = .right
+        gameImageView = UIImageView(image: UIImage(named: "app_logo"))
         
         descriptionLabel = UILabel()
         descriptionLabel.text = "Yet another tic-tac-toe game".uppercased()
         descriptionLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        descriptionLabel.minimumScaleFactor = 0.75
         descriptionLabel.textAlignment = .center
     }
     
     private func addSubviews() {
         addSubview(gameImageView)
-        addSubview(titleLabel)
         addSubview(descriptionLabel)
     }
     
     private func constraintSubviews() {
         gameImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            gameImageView.heightAnchor.constraint(equalToConstant: 60),
-            gameImageView.widthAnchor.constraint(equalTo: gameImageView.heightAnchor),
             gameImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            gameImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor)])
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: gameImageView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: gameImageView.bottomAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: gameImageView.trailingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)])
+            gameImageView.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor),
+            gameImageView.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor)])
         
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: gameImageView.bottomAnchor, constant: 20),
