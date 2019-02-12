@@ -56,6 +56,8 @@
 /* Begin PBXFileReference section */
 		D808E58222116E8100EC1165 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D808E584221174C400EC1165 /* debug.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.example.xcconfig; sourceTree = "<group>"; };
+		D808E587221327FA00EC1165 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		D808E5882213282200EC1165 /* release.example.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.example.xcconfig; sourceTree = "<group>"; };
 		D8192615212A5E3C003BA3EF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D8192619212A5FAA003BA3EF /* AppLaunchingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchingTests.swift; sourceTree = "<group>"; };
 		D819261B212A63B1003BA3EF /* HomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTests.swift; sourceTree = "<group>"; };
@@ -118,7 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				D808E58222116E8100EC1165 /* debug.xcconfig */,
+				D808E587221327FA00EC1165 /* release.xcconfig */,
 				D808E584221174C400EC1165 /* debug.example.xcconfig */,
+				D808E5882213282200EC1165 /* release.example.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -565,18 +569,20 @@
 		};
 		D8D6DB7B2125277A005F5CD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D808E58222116E8100EC1165 /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C9AUGCDN6V;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				INFOPLIST_FILE = "$(SRCROOT)/Sano/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.doanthieu.Sano;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doanthieu.Sanoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "$(PROVISIONING_PROFILE_SPECIFIER)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -584,18 +590,20 @@
 		};
 		D8D6DB7C2125277A005F5CD6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D808E587221327FA00EC1165 /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C9AUGCDN6V;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				INFOPLIST_FILE = "$(SRCROOT)/Sano/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.doanthieu.Sano;
+				PRODUCT_BUNDLE_IDENTIFIER = com.doanthieu.Sanoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "$(PROVISIONING_PROFILE_SPECIFIER)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
