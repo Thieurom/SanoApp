@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
         
         configView()
         setUpSubviews()
+        showSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -120,5 +121,22 @@ extension HomeViewController {
         playWithFriendButton.addTarget(self, action: #selector(playWithFriendButtonPressed(_:)), for: .touchUpInside)
         
         fightTheRobotButton.addTarget(self, action: #selector(fightTheRobotButtonPressed(_:)), for: .touchUpInside)
+    }
+
+    // Show subviews with animations
+    private func showSubviews() {
+        playWithFriendButton.alpha = 0
+        playWithFriendButton.transform = CGAffineTransform(translationX: 0, y: 30)
+
+        fightTheRobotButton.alpha = 0
+        fightTheRobotButton.transform = CGAffineTransform(translationX: 0, y: 40)
+
+        UIView.animate(withDuration: 0.75, delay: 1.5, animations: {
+            self.playWithFriendButton.alpha = 1
+            self.playWithFriendButton.transform = CGAffineTransform.identity
+
+            self.fightTheRobotButton.alpha = 1
+            self.fightTheRobotButton.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
 }
