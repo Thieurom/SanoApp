@@ -130,10 +130,8 @@ extension Robot {
         var locations = [Location]()
         
         for row in 0..<gameBoard.size {
-            for column in 0..<gameBoard.size {
-                if gameBoard.piece(atRow: row, column: column) == nil {
-                    locations.append((row, column))
-                }
+            for column in 0..<gameBoard.size where gameBoard.piece(atRow: row, column: column) == nil {
+                locations.append((row, column))
             }
         }
         
@@ -148,7 +146,7 @@ extension Robot {
         let boundIndex = gameBoard.size - 1
         let cornerLocations: [Location] = [(0, 0), (0, boundIndex), (boundIndex, 0), (boundIndex, boundIndex)]
         
-        let randomIndex = Int(arc4random_uniform(UInt32(cornerLocations.count)))
+        let randomIndex = Int.random(in: 0..<cornerLocations.count)
         
         return cornerLocations[randomIndex]
     }
