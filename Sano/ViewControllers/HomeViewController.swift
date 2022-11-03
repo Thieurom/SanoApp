@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
         
         configView()
         setUpSubviews()
+        showSubviews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,19 +61,13 @@ extension HomeViewController {
     private func configView() {
         view.backgroundColor = .white
         
-        // customize navigationBar for this and will-be-pushed view controllers
-        navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 16, weight: .bold)]
-        
+
         let backImage = UIImage(named: "back_bar_button")
         navigationController?.navigationBar.backIndicatorImage = backImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-        
+
         // remove the title of back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
@@ -98,27 +93,48 @@ extension HomeViewController {
             gameTitleContainerView.topAnchor.constraint(equalTo: view.topAnchor),
             gameTitleContainerView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             gameTitleContainerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            gameTitleContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)])
+            gameTitleContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
+        ])
         
         NSLayoutConstraint.activate([
             gameTitleView.centerXAnchor.constraint(equalTo: gameTitleContainerView.centerXAnchor),
-            gameTitleView.bottomAnchor.constraint(equalTo: gameTitleContainerView.bottomAnchor)])
+            gameTitleView.bottomAnchor.constraint(equalTo: gameTitleContainerView.bottomAnchor)
+        ])
         
         NSLayoutConstraint.activate([
             playWithFriendButton.topAnchor.constraint(equalTo: gameTitleView.bottomAnchor, constant: 100),
             playWithFriendButton.heightAnchor.constraint(equalToConstant: 44),
             playWithFriendButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
-            playWithFriendButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)])
+            playWithFriendButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)
+        ])
         
         NSLayoutConstraint.activate([
             fightTheRobotButton.topAnchor.constraint(equalTo: playWithFriendButton.bottomAnchor, constant: 8),
             fightTheRobotButton.heightAnchor.constraint(equalToConstant: 44),
             fightTheRobotButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
-            fightTheRobotButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)])
+            fightTheRobotButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)
+        ])
         
         // config action-target for button
         playWithFriendButton.addTarget(self, action: #selector(playWithFriendButtonPressed(_:)), for: .touchUpInside)
         
         fightTheRobotButton.addTarget(self, action: #selector(fightTheRobotButtonPressed(_:)), for: .touchUpInside)
+    }
+
+    // Show subviews with animations
+    private func showSubviews() {
+        playWithFriendButton.alpha = 0
+        playWithFriendButton.transform = CGAffineTransform(translationX: 0, y: 30)
+
+        fightTheRobotButton.alpha = 0
+        fightTheRobotButton.transform = CGAffineTransform(translationX: 0, y: 40)
+
+        UIView.animate(withDuration: 0.75, delay: 1.5, animations: {
+            self.playWithFriendButton.alpha = 1
+            self.playWithFriendButton.transform = CGAffineTransform.identity
+
+            self.fightTheRobotButton.alpha = 1
+            self.fightTheRobotButton.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
 }
