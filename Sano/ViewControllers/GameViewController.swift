@@ -103,16 +103,8 @@ extension GameViewController {
     // Further config the root view since it will be created programmatically
     private func configView() {
         view.backgroundColor = .white
-        
-        // customize navigationBar for this and will-be-pushed view controllers
-        navigationController?.navigationBar.barTintColor = .black
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
-        // this will change status bar to light content
-        navigationController?.navigationBar.barStyle = .black
+
+        navigationController?.navigationBar.tintColor = .black
         
         // add menu button
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu_bar_button"), style: .plain, target: self, action: #selector(menuBarButtonPressed(_:)))
@@ -131,13 +123,15 @@ extension GameViewController {
         NSLayoutConstraint.activate([
             gameScoringView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             gameScoringView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            gameScoringView.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
+            gameScoringView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         
         NSLayoutConstraint.activate([
             gameView.topAnchor.constraint(equalTo: gameScoringView.bottomAnchor, constant: 20),
             gameView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             gameView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            gameView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
+            gameView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
         
         // further config
         gameView.gameBoardView.delegate = self
