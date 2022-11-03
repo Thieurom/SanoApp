@@ -80,7 +80,8 @@ extension MenuViewController {
     
     private func setUpSubviews() {
         menuView.backgroundColor = .white
-        menuView.layer.cornerRadius = 3
+        menuView.layer.cornerRadius = 8
+        menuView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         // add subviews to view hierarchy
         view.addSubview(menuView)
@@ -89,9 +90,11 @@ extension MenuViewController {
         menuView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            menuView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            menuView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            menuView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)])
+            menuView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            menuView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            menuView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
         for (index, menuAction) in menuActions.enumerated() {
             let button = GhostButton(title: menuAction.title, icon: menuAction.style.icon())
             button.tag = index
@@ -104,7 +107,8 @@ extension MenuViewController {
                 button.heightAnchor.constraint(equalToConstant: 40),
                 button.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 8),
                 button.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -8),
-                button.topAnchor.constraint(equalTo: bottomActionButton?.bottomAnchor ?? menuView.topAnchor, constant: 8)])
+                button.topAnchor.constraint(equalTo: bottomActionButton?.bottomAnchor ?? menuView.topAnchor, constant: 8)
+            ])
             
             button.addTarget(self, action: #selector(actionHandling(_:)), for: .touchUpInside)
             
@@ -133,7 +137,8 @@ extension MenuViewController {
             closeButton.topAnchor.constraint(equalTo: bottomActionButton?.bottomAnchor ?? menuView.topAnchor, constant: 8),
             closeButton.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 8),
             closeButton.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -8),
-            closeButton.bottomAnchor.constraint(equalTo: menuView.bottomAnchor, constant: -8)])
+            closeButton.bottomAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+        ])
 
         closeButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
     }

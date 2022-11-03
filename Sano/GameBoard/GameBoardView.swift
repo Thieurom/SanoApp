@@ -108,7 +108,7 @@ extension GameBoardView {
         
         let gamePieceViewCollection = containerView.subviews.flatMap { $0.subviews }
         
-        guard let index = gamePieceViewCollection.index(of: gamePieceView) else {
+        guard let index = gamePieceViewCollection.firstIndex(of: gamePieceView) else {
             return
         }
 

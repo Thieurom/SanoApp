@@ -102,10 +102,10 @@ extension SettingViewController {
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 10),
-            containerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)])
+            containerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -10)
+        ])
         
-        NSLayoutConstraint.activate([
-            startButton.heightAnchor.constraint(equalToConstant: 44)])
+        NSLayoutConstraint.activate([startButton.heightAnchor.constraint(equalToConstant: 44)])
         
         // add target-action
         startButton.addTarget(self, action: #selector(startButtonPressed(_:)), for: .touchUpInside)
@@ -116,6 +116,7 @@ extension SettingViewController {
         let gameManager = GameManager(boardSize: 3, firstPlayingPiece: firstPlayingPiece)
         let gameViewController = GameViewController(gameManager: gameManager, isFightingRobot: isFightingRobot)
         let navigationController = UINavigationController(rootViewController: gameViewController)
+        navigationController.modalPresentationStyle = .overFullScreen
         
         present(navigationController, animated: true, completion: nil)
     }
